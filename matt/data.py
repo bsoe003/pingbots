@@ -21,9 +21,8 @@ class DownloadData(Object):
     def get_currently_sending():
         return(downloads[0])
     
-    def sort_by_time():
-        
-        sort(self.downloads, key=lambda x: x[0])
+    def sort_by_votes():        
+        sort(self.downloads, key= lambda x: x.votes) 
     
 
 class ReceiveRequest(protocol.Protocol):
@@ -38,9 +37,8 @@ class ReceiveFactory(protocol.Factory):
     def __init__(datastore):
         self.queue = datastore
 
-
-class SendRequest(protocol.Protocol):
-    pass
+class BroadCast(protocol.Protocol):
+    
 
 def main():
     datastore = DownloadData()
