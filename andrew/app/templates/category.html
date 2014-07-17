@@ -7,14 +7,21 @@
           {% if queue %}
           <ol>
             {% for vid in queue %}
-            <li>{{ vid }}</li>
+            <li>
+	      <b>{{ vid.name }}</b>
+	      <ul>
+		<li>Size:  {{ vid.size }} MB</li>
+		<li>Votes: {{ vid.votes }}</li>
+		<li>Time: {{ vid.time }} minutes</li>
+		<li>Contribution per Voter: {{ vid.contribution }} MB</li>
+	      </ul>
+	    </li>
             {% endfor %}
           </ol>
           {% endif %}
 	  {% else %}
 	  <h1>Choose a category in the Navigation Bar!</h1>
 	  {% endif %}
-	  
         </div>
       </div>
 {% endblock content %}
