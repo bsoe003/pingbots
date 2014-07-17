@@ -30,3 +30,11 @@ def category(category):
                            category=category,
                            queue=cats[category])
 
+@app.route('/downloads')
+def downloads():
+    downloads={'Movie1',
+                'Movie2'}
+    return render_template('downloads.html',
+                            title="Downloads Page",
+                            downloads=downloads
+                            )
