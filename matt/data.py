@@ -42,8 +42,10 @@ class DownloadData(object):
                 return
 
     def get_currently_sending(self):
-        return(downloads[0])
-    
+        try:
+            return(self.downloads[0])
+        except:
+            return("none in schedule")
     def sort_by_votes(self):        
         sort(self.downloads, key= lambda x: x.votes) 
     
@@ -72,6 +74,8 @@ class Broadcast(Protocol):
 
     def connectionMade(self):
         while(True):
+            while(self.factory.datastore.get_currently_sending()=="none in schedule"):
+                time.sleep(.5)
             sending = self.factory.datastore.get_currently_sending()
             self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
             to_broadcast = "x"*(BYTES_READ+1)
