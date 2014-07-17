@@ -1,8 +1,9 @@
-from twisted.protocol import Protocol, Factory
+from twisted.internet.protocol import Protocol, Factory
+from twisted.internet import reactor
 import time
 
 class Download(Object):
-    def __init__(self, name, size, votes, length =0):
+    def __init__(self, name, size, votes, path, length =0):
         self.name=name
         self.size=size
         self.votes=votes
@@ -28,7 +29,7 @@ class DownloadData(Object):
         sort(self.downloads, key= lambda x: x.votes) 
     
 
-class ReceiveRequest(protocol.Protocol):
+class ReceiveRequest(Protocol):
     def dataReceived(self,data):
         if data.beginswith("vote"):
             self.factory.queue.vote(split(data,"|")[1])
@@ -37,13 +38,19 @@ class ReceiveRequest(protocol.Protocol):
 
     def connectionMade(self):
         
-class ReceiveFactory(protocol.Factory):
+class ReceiveFactory(Factory):
     def __init__(self, datastore):
         self.queue = datastore
 
-class Broadcast(protocol.Protocol):
+class Broadcast(Protocol):
     def connectionMade(self):
-        
+        sending = datastore.get_currently_sending()
+        self.transport.write("begin|{0}|{1}|{2}".format()
+
+class BroadcastFactory(Factory):
+    def __init__(self, datastore):
+        self.queue = datastore
+
 
 def main():
     datastore = DownloadData()
