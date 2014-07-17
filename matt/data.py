@@ -45,7 +45,7 @@ class ReceiveFactory(Factory):
 class Broadcast(Protocol):
     def connectionMade(self):
         sending = datastore.get_currently_sending()
-        self.transport.write("begin|{0}|{1}|{2}".format()
+        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size)
 
 class BroadcastFactory(Factory):
     def __init__(self, datastore):
