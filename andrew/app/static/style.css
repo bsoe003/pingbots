@@ -18,7 +18,12 @@ header
 	position: fixed;
 	z-index: 50;
 	width: 100%;
-	background-color: #151515;
+	background-color: #0a0a0a;
+}
+
+header > img
+{
+	cursor: pointer;
 }
 
 #wrapper
@@ -102,20 +107,25 @@ header
 
 .social > ul > li:nth-child(1):hover
 {
-	background-color: #3b579d;
+	background-color: #004b8c;
 }
 
 .social > ul > li:nth-child(2):hover
 {
-	background-color: #00aced;
+	background-color: #3b579d;
 }
 
 .social > ul > li:nth-child(3):hover
 {
-	background-color: #d73532;
+	background-color: #00aced;
 }
 
 .social > ul > li:nth-child(4):hover
+{
+	background-color: #d73532;
+}
+
+.social > ul > li:nth-child(5):hover
 {
 	background-color: #34465d;
 }
@@ -138,6 +148,7 @@ header
 	margin-left: 1%;
 	display: table;
 	vertical-align: middle;
+	text-shadow: 1px 1px 1px rgba(100, 100, 100, 1);
 }
 .title > b
 {
