@@ -15,59 +15,78 @@ class DownloadData(object):
     def __init__(self):
         self.downloads=[]
 
-    def vote(name):
+    def vote(self, name):
         for download in self.downloads:
             if download.name == name:
                 download.votes+=1
+                
+                print("Successfully voted for {0}. Total is {1}".format(name, download.votes))
                 return
+        print("ERROR: Vote for video not found")
 
-    def add(name, size, path):
+    def add(self, name, size, path):
         self.downloads.append(Download(name, size, 1, path))
-        
-    def next():
+        print("Added: " + name + " (" + size + "B) to download queue")
+
+    def next(self):
         self.downloads[0].votes = 0
         self.downloads.append(self.downloads[0])
         self.downloads.reverse()
         self.downloads.pop()
         self.downloads.reverse()
-    def remove(name):
+
+    def remove(self, name):
         for download_num in range(len(self.downloads)):
             if self.downloads[download_num].name == name:
                 self.downloads.remove(downloads[download_num])
                 return
 
-    def get_currently_sending():
+    def get_currently_sending(self):
         return(downloads[0])
     
-    def sort_by_votes():        
+    def sort_by_votes(self):        
         sort(self.downloads, key= lambda x: x.votes) 
     
 
 class ReceiveRequest(Protocol):
-    def dataReceived(self,data):
-        if data.beginswith("vote"):
-            self.factory.queue.vote(split(data,"|")[1])
-        elif data.beginswith("add"):
-            self.factory.queue.add(split(data,"|")[1],split(data,"|")[2])
+    def __init__(self, factory):
+        self.factory = factory
 
+    def dataReceived(self,data):
+        data = data.strip("\r\n")
+        if data.startswith("vote"):
+            self.factory.queue.vote(data.split("|")[1])
+        elif data.startswith("add"):
+            args =  data.split("|")
+            self.factory.queue.add(args[1],args[2],args[3])
 class ReceiveFactory(Factory):
     def __init__(self, datastore):
         self.queue = datastore
+        
+    def buildProtocol(self, addr):
+        return ReceiveRequest(self)
 
 class Broadcast(Protocol):
+    def __init__(self,factory):
+        self.factory = factory
+
     def connectionMade(self):
-        sending = datastore.get_currently_sending()
-        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
-        to_broadcast = "x"*(BYTES_READ+1)
-        file_to_broadcast = open(path,'r')
-        while(len(to_broadcast>=BYTES_READ)):
-            to_broadcast=(file_to_broadcast.read(BYTES_READ))
-            self.transport.write(to_broadcast)
+        while(True):
+            sending = self.factory.datastore.get_currently_sending()
+            self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
+            to_broadcast = "x"*(BYTES_READ+1)
+            file_to_broadcast = open(path,'r')
+            while(len(to_broadcast>=BYTES_READ)):
+                to_broadcast=(file_to_broadcast.read(BYTES_READ))
+                self.transport.write(to_broadcast)
+            self.factory.datastore.next()
 
 class BroadcastFactory(ClientFactory):
     def __init__(self, datastore):
-        self.queue = datastore
+        self.datastore=datastore
 
+    def buildProtocol(self, addr):
+        return Broadcast(self)
 
 def main():
     datastore = DownloadData()
