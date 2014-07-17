@@ -12,7 +12,6 @@ body
 
 header
 {
-
 	padding-left: 25px;
 	padding-top: 25px;
 }
@@ -21,20 +20,19 @@ header
 {
 	display: block;
 	overflow: hidden;
-
 }
 
 #nav
 {
-	width: 15%;
-	float: left;
+	width: 210px;
+	position: fixed;
 	text-align: left;
 	overflow: hidden;
 	margin-top: 10px;
-	margin-left: -2.3%;
+	margin-left: -40px;
 	height: 90%;
 	left: 0;
-	border-right: 1px #151515 solid;
+	/*border-right: 1px #151515 solid;*/
 }
 
 #nav > ul > li
@@ -68,9 +66,9 @@ header
 
 #content
 {
-	width: 85%;
-	margin-left: 15%;
-	float: center;
+	margin-left: 210px;
+	padding-right: 10px;
+	position: absolute;
 }
 
 .scrollable
