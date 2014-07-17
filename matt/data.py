@@ -75,12 +75,12 @@ class Broadcast(Protocol):
     def connectionMade(self):
         sending = self.factory.datastore.get_currently_sending()
         if(sending == "none in schedule"):
-            print("I'm gonna wait.")
-            sending = task.deferLater(reactor, 4, self.factory.datastore.get_currently_sending)
-            reactor.callLater(1, d.callback, None)
-            print("I should have waited.")
+            self.try_send()
         else:
             send_file(sending.path)
+
+    def try_send(self):
+        
 
     def send_file(self,sending):
         self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
