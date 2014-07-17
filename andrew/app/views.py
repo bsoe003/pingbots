@@ -21,12 +21,23 @@ def category(category):
                        "Mark Dankberg's Big Day",
                        "Exede vs. Predator",
                        "Sleeping on a Plane"],
-            'Sports':["Local Sports Stars Beat Better Team",
-                      "Man Punts Giant Football",
-                      "The Pitcher and the Pilot"]}
+            'Sports':["Local Sports Stars",
+                      "The Giant Football",
+                      "The Pitcher and the Pilot",
+                      "Intern Volleyball"],
+            'Action':["Shooting People with Guns",
+                      "A Conspicuous Conspirator",
+                      "Things Exploding Just Far Enough Away"],
+            'Nature':["When Ladybugs Attack",
+                      "Roses: Artificial In-stamen-ation",
+                      "Watermelons, Bananas, and Other Suggestive Plants",
+                      "The Cabbage Revolution"],
+            'Indie':["Hipsters Pretending to Understand Fake Concepts",
+                     "Neutral Milk Hotel Slaying Dragons",
+                     "Undead Elmo II"]}
     return render_template("base.html",
                            title="Category Page",
-                           navbar=cats.keys(),
+                           navbar=sorted(cats.keys()),
                            category=category,
                            queue=cats[category])
 
