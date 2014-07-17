@@ -1,16 +1,18 @@
-from twisted.internet.protocol import Protocol, Factory
+from twisted.internet.protocol import Protocol, Factory, ClientFactory
 from twisted.internet import reactor
 import time
 
-class Download(Object):
+BYTES_READ = 1000
+
+class Download(object):
     def __init__(self, name, size, votes, path):
         self.name=name
         self.size=size
         self.votes=votes
-        self.path = path
+        self.path=path
 
-class DownloadData(Object):
-    def __init__():
+class DownloadData(object):
+    def __init__(self):
         self.downloads=[]
 
     def vote(name):
@@ -48,8 +50,6 @@ class ReceiveRequest(Protocol):
         elif data.beginswith("add"):
             self.factory.queue.add(split(data,"|")[1],split(data,"|")[2])
 
-    def connectionMade(self):
-        
 class ReceiveFactory(Factory):
     def __init__(self, datastore):
         self.queue = datastore
@@ -58,8 +58,13 @@ class Broadcast(Protocol):
     def connectionMade(self):
         sending = datastore.get_currently_sending()
         self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
+        to_broadcast = "x"*(BYTES_READ+1)
+        file_to_broadcast = open(path,'r')
+        while(len(to_broadcast>=BYTES_READ)):
+            to_broadcast=(file_to_broadcast.read(BYTES_READ))
+            self.transport.write(to_broadcast)
 
-class BroadcastFactory(Factory):
+class BroadcastFactory(ClientFactory):
     def __init__(self, datastore):
         self.queue = datastore
 
@@ -72,5 +77,5 @@ def main():
     reactor.connectTCP('localhost', 1338, send_factory)
     reactor.run()
     
-if __name__ == "__main__"):
+if __name__ == "__main__":
     main()
