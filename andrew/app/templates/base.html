@@ -10,14 +10,14 @@
   </head>
   <body>
     <header>
-      <img src="static/header.png" />
+      <img src="static/header.png" onclick="location.href='/index'" />
     </header>
     <div id="wrapper">
       <div id="nav"> <!-- nav tab -->
         <ul {% if fadeIn %} class="animated fadeInDown"{% endif %}>
         	{% for elt in navbar %}
 		{% if elt == category %}
-		<li class="active" onclick="/{{ elt }}location.href='/{{ elt }}'">{{ elt.capitalize() }}</li>
+		<li class="active">{{ elt.capitalize() }}</li>
 		{% else %}
         	<li onclick="location.href='/{{ elt }}'">{{ elt.capitalize() }}</li>
 		{% endif %}
