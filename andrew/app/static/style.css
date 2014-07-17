@@ -32,7 +32,6 @@ header
 	margin-left: -40px;
 	height: 90%;
 	left: 0;
-	/*border-right: 1px #151515 solid;*/
 }
 
 #nav > ul > li
@@ -49,6 +48,7 @@ header
 {
 	list-style-type: none;
 	width: 100%;
+	overflow: auto;
 }
 
 #nav > ul > li:hover
@@ -74,4 +74,45 @@ header
 .scrollable
 {
 	overflow: auto;
+}
+
+.social
+{
+	position: fixed;
+	right: 0;
+	z-index: 50;
+	top: 20%;
+}
+
+.social > ul
+{
+	list-style: none;
+	height: 150px;
+}
+
+.social > ul > li
+{
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+
+.social > ul > li:nth-child(1):hover
+{
+	background-color: #3b579d;
+}
+
+.social > ul > li:nth-child(2):hover
+{
+	background-color: #00aced;
+}
+
+.social > ul > li:nth-child(3):hover
+{
+	background-color: #d73532;
+}
+
+.social > ul > li:nth-child(4):hover
+{
+	background-color: #34465d;
 }

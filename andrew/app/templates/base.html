@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="static/animate.css">
     <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
   </head>
   <body>
     <header>
@@ -26,7 +27,13 @@
       {% block content %}
       {% endblock content %}
     </div>
-    {% block social %}
-{% endblock social %}
+    <div class="social">
+      <ul>
+        <li><img src="static/facebook.png" alt="facebook" /></li>
+        <li><img src="static/twitter.png" alt="twitter"/></li>
+        <li><img src="static/pinterest.png" alt="pinterest"/></li>
+        <li><img src="static/tumblr.png" alt="tumblr"/></li> 
+      </ul>
+    </div>
   </body>
 </html>
