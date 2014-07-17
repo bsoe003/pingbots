@@ -16,9 +16,9 @@
         <ul>
         	{% for elt in navbar %}
 		{% if elt == category %}
-		<li class="active">{{ elt }}</li>
+		<li class="active" onclick="/{{ elt }}location.href='/{{ elt }}'">{{ elt }}</li>
 		{% else %}
-        	<li>{{ elt }}</li>
+        	<li onclick="location.href='/{{ elt }}'">{{ elt }}</li>
 		{% endif %}
         	{% endfor %}
         </ul>
