@@ -1,7 +1,10 @@
-from app import app
-from flask import render_template
-
+from app import app, db, lm
+from flask import render_template, g, flash, redirect
+from flask.ext.login import (
+    login_user, logout_user, current_user, login_required
+)
 from random import randint
+from forms import LoginForm
 
 class Video:
     def __init__(self, name, 
@@ -60,7 +63,7 @@ def category(category):
 @app.route('/downloads')
 def downloads():
     queue=['Movie1',
-                'Movie2']
+           'Movie2']
     navbar=["index"]
     return render_template('categories.html',
                             title="Downloads Page",
@@ -68,3 +71,15 @@ def downloads():
                             navbar=navbar,
                             category="Downloads"
                             )
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    return render_template('login.html',
+                           title='Sign In',
+                           navbar=sorted(cats.keys()),
+                           form=form)
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
