@@ -6,16 +6,20 @@
           <h1>Category: <em>{{ category.capitalize() }}</em></h1>
           {% if queue %}
 	  <div>
-            {% for vid in queue %}
-            <div>
-	      <b>{{ vid.name }}</b>
-	      <ul>
-		<li>Size:  {{ vid.size }} MB</li>
-		<li>Votes: {{ vid.votes }}</li>
-		<li>Time: {{ vid.time }} minutes</li>
-		<li>Contribution per Voter: {{ vid.contribution }} MB</li>
-	      </ul>
-	    </div>
+          {% for vid in queue %}
+          <div class="cont">
+            <div class="title">
+	            <b>{{ vid.name }}</b>
+            </div>
+            <div class="detail">
+	          <ul>
+          		<li><b>Size:</b>  {{ vid.size }} MB</li>
+          		<li><b>Votes:</b> {{ vid.votes }}</li>
+          		<li><b>Time:</b> {{ vid.time }} minutes</li>
+          		<li><b>Contribution per Voter:</b> {{ vid.contribution }} MB</li>
+	          </ul>
+	          </div>
+         </div>
             {% endfor %}
           </div>
           {% endif %}
