@@ -39,9 +39,12 @@ def category(category):
 
 @app.route('/downloads')
 def downloads():
-    downloads={'Movie1',
-                'Movie2'}
-    return render_template('downloads.html',
+    queue=['Movie1',
+                'Movie2']
+    navbar=["index"]
+    return render_template('base.html',
                             title="Downloads Page",
-                            downloads=downloads
+                            queue=queue,
+                            navbar=navbar,
+                            category="Downloads"
                             )
