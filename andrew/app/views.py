@@ -22,6 +22,7 @@ def category(category):
                        "Exede vs. Predator",
                        "Sleeping on a Plane"],
             'Sports':["Local Sports Stars",
+                      "Local Sports Stars II: Beating the Better Team"
                       "The Giant Football",
                       "The Pitcher and the Pilot",
                       "Intern Volleyball"],
