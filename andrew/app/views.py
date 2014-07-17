@@ -75,6 +75,8 @@ def downloads():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/index')
     return render_template('login.html',
                            title='Sign In',
                            navbar=sorted(cats.keys()),
