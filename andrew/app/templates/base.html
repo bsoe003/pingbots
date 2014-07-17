@@ -15,7 +15,11 @@
       <div id="nav"> <!-- nav tab -->
         <ul>
         	{% for elt in navbar %}
+		{% if elt == category %}
+		<li class="active">{{ elt }}</li>
+		{% else %}
         	<li>{{ elt }}</li>
+		{% endif %}
         	{% endfor %}
         </ul>
       </div>
