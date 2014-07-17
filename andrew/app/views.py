@@ -17,7 +17,7 @@ def index():
                            queue=queue,
                            navbar=navbar)
 
-@app.route('/categories/<category>')
+@app.route('/<category>')
 def category(category):
     cats = {'Popular':["Hackathon 3D",
                        "Mark Dankberg's Big Day",
@@ -28,6 +28,6 @@ def category(category):
                       "The Pitcher and the Pilot"]}
     return render_template("base.html",
                            title="Category Page",
+                           navbar=cats.keys(),
                            category=category,
-                           queue=cats[category],
-                           navbar=navbar)
+                           queue=cats[category])
