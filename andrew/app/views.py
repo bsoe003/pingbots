@@ -45,7 +45,8 @@ def index():
     title = "Downloads Home"
     return render_template("category.html",
                            title=title,
-                           navbar=sorted(cats.keys()))
+                           navbar=sorted(cats.keys()),
+                           fadeIn=True)
 
 @app.route('/<category>')
 def category(category):
@@ -53,7 +54,8 @@ def category(category):
                            title="Category Page",
                            navbar=sorted(cats.keys()),
                            category=category,
-                           queue=cats[category])
+                           queue=cats[category],
+                           fadeIn=False)
 
 @app.route('/downloads')
 def downloads():

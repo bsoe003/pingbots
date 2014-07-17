@@ -5,9 +5,9 @@
 	  {% if category %}
           <h1>Category: <em>{{ category.capitalize() }}</em></h1>
           {% if queue %}
-          <ol>
+	  <div>
             {% for vid in queue %}
-            <li>
+            <div>
 	      <b>{{ vid.name }}</b>
 	      <ul>
 		<li>Size:  {{ vid.size }} MB</li>
@@ -15,9 +15,9 @@
 		<li>Time: {{ vid.time }} minutes</li>
 		<li>Contribution per Voter: {{ vid.contribution }} MB</li>
 	      </ul>
-	    </li>
+	    </div>
             {% endfor %}
-          </ol>
+          </div>
           {% endif %}
 	  {% else %}
 	  <h1>Choose a category in the Navigation Bar!</h1>

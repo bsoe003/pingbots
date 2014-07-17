@@ -14,7 +14,7 @@
     </header>
     <div id="wrapper">
       <div id="nav"> <!-- nav tab -->
-        <ul class="animated fadeInDown">
+        <ul {% if fadeIn %} class="animated fadeInDown"{% endif %}>
         	{% for elt in navbar %}
 		{% if elt == category %}
 		<li class="active" onclick="/{{ elt }}location.href='/{{ elt }}'">{{ elt.capitalize() }}</li>
