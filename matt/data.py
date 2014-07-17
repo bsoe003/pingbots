@@ -3,11 +3,10 @@ from twisted.internet import reactor
 import time
 
 class Download(Object):
-    def __init__(self, name, size, votes, path, length =0):
+    def __init__(self, name, size, votes, path):
         self.name=name
         self.size=size
         self.votes=votes
-        self.length=length
 
 class DownloadData(Object):
     def __init__():
@@ -21,7 +20,16 @@ class DownloadData(Object):
 
     def add(name, size):
         self.downloads.append(Download(name, size, 1, times))
-    
+        
+    def next():
+
+    def remove(name):
+        for download in downloads:
+            if download.name == name:
+                downloads.remove(download)
+            
+            
+
     def get_currently_sending():
         return(downloads[0])
     
@@ -45,7 +53,7 @@ class ReceiveFactory(Factory):
 class Broadcast(Protocol):
     def connectionMade(self):
         sending = datastore.get_currently_sending()
-        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size)
+        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
 
 class BroadcastFactory(Factory):
     def __init__(self, datastore):
@@ -59,3 +67,6 @@ def main():
     reactor.listenTCP(1337, recv_factory)
     reactor.connectTCP('localhost', 1338, send_factory)
     reactor.run()
+    
+if __name__ == "__main__"):
+    main()
