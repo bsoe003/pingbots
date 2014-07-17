@@ -23,6 +23,8 @@ class DownloadData(Object):
         self.downloads.append(Download(name, size, 1, path))
         
     def next():
+        self.downloads[0].votes = 0
+        self.downloads.append(self.downloads[0])
         self.downloads.reverse()
         self.downloads.pop()
         self.downloads.reverse()
