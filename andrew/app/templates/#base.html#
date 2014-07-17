@@ -3,6 +3,9 @@
     <title>{{ title }}</title>
   </head>
   <body>
+    <header>
+      <img src="{{ imageUrl }}" />
+    </header>
     <h1>Category: <em>{{ category }}</em></h1>
     {% if queue %}
     <ol>

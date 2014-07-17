@@ -1,8 +1,18 @@
 <html>
   <head>
     <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
   </head>
   <body>
+    <header>
+      <img src="static/header.png" />
+    </header>
+    <div id="nav">
+      <ul>
+	{% for elt in navbar %}
+	<li>{{ elt }}</li>
+	{% endfor %}
+      </ul>
     <h1>Category: <em>{{ category }}</em></h1>
     {% if queue %}
     <ol>
