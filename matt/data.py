@@ -14,5 +14,8 @@ class DownloadData(Object):
             if download.name == name:
                 download.votes+=1
                 return
-        self.downloads.append(Download(name, 0, 0, times = get_time()))
+    def add(name, size):
+        self.downloads.insert(0, Download(name, size, 1, times))
     
+    def get_currently_sending():
+        return(downloads[0])
