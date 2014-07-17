@@ -25,13 +25,13 @@ cats = {'popular':["Hackathon 3D",
 @app.route('/index')
 def index():
     title = "Downloads Home"
-    return render_template("base.html",
+    return render_template("category.html",
                            title=title,
                            navbar=sorted(cats.keys()))
 
 @app.route('/<category>')
 def category(category):
-    return render_template("base.html",
+    return render_template("category.html",
                            title="Category Page",
                            navbar=sorted(cats.keys()),
                            category=category,
