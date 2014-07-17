@@ -7,28 +7,30 @@ class Download(Object):
         self.name=name
         self.size=size
         self.votes=votes
+        self.path = path
 
 class DownloadData(Object):
     def __init__():
         self.downloads=[]
 
     def vote(name):
-        for download in downloads:
+        for download in self.downloads:
             if download.name == name:
                 download.votes+=1
                 return
 
-    def add(name, size):
-        self.downloads.append(Download(name, size, 1, times))
+    def add(name, size, path):
+        self.downloads.append(Download(name, size, 1, path))
         
     def next():
-
+        self.downloads.reverse()
+        self.downloads.pop()
+        self.downloads.reverse()
     def remove(name):
-        for download in downloads:
-            if download.name == name:
-                downloads.remove(download)
-            
-            
+        for download_num in range(len(self.downloads)):
+            if self.downloads[download_num].name == name:
+                self.downloads.remove(downloads[download_num])
+                return
 
     def get_currently_sending():
         return(downloads[0])
