@@ -1,5 +1,5 @@
 from twisted.internet.protocol import Protocol, Factory, ClientFactory
-from twisted.internet import reactor
+from twisted.internet import reactor, defer, task
 import time
 
 BYTES_READ = 1000
@@ -73,17 +73,23 @@ class Broadcast(Protocol):
         self.factory = factory
 
     def connectionMade(self):
-        while(True):
-            while(self.factory.datastore.get_currently_sending()=="none in schedule"):
-                time.sleep(.5)
-            sending = self.factory.datastore.get_currently_sending()
-            self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
-            to_broadcast = "x"*(BYTES_READ+1)
-            file_to_broadcast = open(path,'r')
-            while(len(to_broadcast>=BYTES_READ)):
-                to_broadcast=(file_to_broadcast.read(BYTES_READ))
-                self.transport.write(to_broadcast)
-            self.factory.datastore.next()
+        sending = self.factory.datastore.get_currently_sending()
+        if(sending == "none in schedule"):
+            print("I'm gonna wait.")
+            sending = task.deferLater(reactor, 4, self.factory.datastore.get_currently_sending)
+            reactor.callLater(1, d.callback, None)
+            print("I should have waited.")
+        else:
+            send_file(sending.path)
+
+    def send_file(self,sending):
+        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
+        to_broadcast = "x"*(BYTES_READ+1)
+        file_to_broadcast = open(sending.path,'r')
+        while(len(to_broadcast>=BYTES_READ)):
+            to_broadcast=(file_to_broadcast.read(BYTES_READ))
+            self.transport.write(to_broadcast)
+        self.factory.datastore.next()
 
 class BroadcastFactory(ClientFactory):
     def __init__(self, datastore):
