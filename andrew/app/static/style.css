@@ -14,12 +14,13 @@ header
 {
 	padding-left: 25px;
 	padding-top: 25px;
+	position: fixed;
+	width: 100%;
 }
 
 #wrapper
 {
-	display: block;
-	overflow: hidden;
+	display: block; 
 }
 
 #nav
@@ -27,8 +28,7 @@ header
 	width: 210px;
 	position: fixed;
 	text-align: left;
-	overflow: hidden;
-	margin-top: 10px;
+	margin-top: 100px;
 	margin-left: -40px;
 	height: 90%;
 	left: 0;
@@ -66,14 +66,17 @@ header
 
 #content
 {
-	margin-left: 210px;
-	padding-right: 10px;
+	margin-left: 250px;
+	margin-right: 50px;
+	margin-top: 100px;
 	position: absolute;
+	width: 75%;
+
 }
 
 .scrollable
 {
-	overflow: auto;
+
 }
 
 .social
@@ -115,4 +118,45 @@ header
 .social > ul > li:nth-child(4):hover
 {
 	background-color: #34465d;
+}
+.cont
+{
+	display: inline-block;
+	float: left;
+	width: 30%;
+}
+
+.title
+{
+	background-color: #f26322;
+	width: 90%;
+	height: 50px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 5 5 5 5;
+	text-align: center;
+	margin-left: 1%;
+	display: table;
+	vertical-align:middle;
+}
+.title > b
+{
+	top: auto;
+	bottom: auto;
+	vertical-align:middle;
+	display: table-cell;
+}
+
+
+.detail
+{
+	width: 90%;
+	background-color: #252525;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 5 5 0 5;
+	padding-bottom: 10px;
+	margin-left: 1%;
+	margin-bottom: 25px;
+	margin-right: 25px;
 }
