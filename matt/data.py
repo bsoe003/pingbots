@@ -7,14 +7,17 @@ class Download(Object):
         self.size=size
         self.votes=votes
         self.length=length
+
 class DownloadData(Object):
     def __init__():
         self.downloads=[]
+
     def vote(name):
         for download in downloads:
             if download.name == name:
                 download.votes+=1
                 return
+
     def add(name, size):
         self.downloads.append(Download(name, size, 1, times))
     
@@ -31,16 +34,21 @@ class ReceiveRequest(protocol.Protocol):
             self.factory.queue.vote(split(data,"|")[1])
         elif data.beginswith("add"):
             self.factory.queue.add(split(data,"|")[1],split(data,"|")[2])
+
     def connectionMade(self):
         
 class ReceiveFactory(protocol.Factory):
-    def __init__(datastore):
+    def __init__(self, datastore):
         self.queue = datastore
 
-class BroadCast(protocol.Protocol):
-    
+class Broadcast(protocol.Protocol):
+    def connectionMade(self):
+        
 
 def main():
     datastore = DownloadData()
-    factory = ReceiveFactory(datastore)
-    reactor.listenTCP(factory, 1337)
+    recv_factory = ReceiveFactory(datastore)
+    send_factory = BroadcastFactory(datastore)
+    reactor.listenTCP(1337, recv_factory)
+    reactor.connectTCP('localhost', 1338, send_factory)
+    reactor.run()
