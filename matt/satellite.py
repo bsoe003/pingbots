@@ -4,8 +4,7 @@ import sys
 
 class ReceiveChunk(Protocol):
     def dataReceived(self, data):
-        if("none in schedule" not in data):
-            sys.stdout.write("Broadcasting: " + data)
+        print(data)
 
 class ReceiveChunkFactory(Factory):
     def buildProtocol(self, addr):
