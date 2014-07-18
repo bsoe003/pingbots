@@ -1,8 +1,8 @@
 from app import db
 
-
 class User(db.Model):
-    username = db.Column(db.String(64), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64))
 
     def __repr__(self):
         return '<User %r>' % (self.username)
@@ -16,7 +16,8 @@ class User(db.Model):
     def is_anonymous(self):
         return False
 
-
+    def get_id(self):
+        return self.id
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)

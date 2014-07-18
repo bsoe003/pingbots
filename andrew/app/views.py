@@ -1,10 +1,11 @@
 from app import app, db, lm
-from flask import render_template, g, flash, redirect
+from flask import render_template, g, redirect, session
 from flask.ext.login import (
-    login_user, logout_user, current_user, login_required
+    login_user, logout_user, current_user, login_required, url_for
 )
 from random import randint
 from forms import LoginForm
+from models import User
 
 class Video:
     def __init__(self, name, 
@@ -75,6 +76,9 @@ def downloads():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.username.data is not None:
+        login_user(load_user(form.username.data))
+        return redirect(url_for('index'))
     if form.validate_on_submit():
         return redirect('/index')
     return render_template('login.html',
@@ -83,5 +87,7 @@ def login():
                            form=form)
 
 @lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(name):
+    for user in User.query.all():
+        if user.username == name:
+            return user
