@@ -14,7 +14,7 @@ class ReceiveRequest(Protocol):
             self.factory.datastore.vote(data.split("|")[1])
         elif data.startswith("add"):
             args =  data.split("|")
-            self.factory.datastore.add(args[1],args[2],args[3])
+            self.factory.datastore.add(args[1],args[2]) #name, path
 class ReceiveFactory(Factory):
     def __init__(self, datastore):
         self.datastore = datastore
@@ -38,7 +38,7 @@ class Broadcast(Protocol):
             self.send_file(sending)
 
     def send_file(self,sending):
-        self.transport.write("begin|{0}|{1}".format(sending.name, sending.size))
+        self.transport.write("begin|{0}".format(sending.name))
         to_broadcast = "x"*(BYTES_READ+1)
         file_to_broadcast = open(sending.path,'r')
         while(len(to_broadcast)>=BYTES_READ):

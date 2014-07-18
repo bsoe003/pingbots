@@ -1,15 +1,13 @@
 from twisted.internet.protocol import Protocol, Factory, ClientFactory
 from twisted.internet import reactor, defer, task
-import time
+import time, os
 
 BYTES_READ = 1000
 
-datastore = DownloadData()
-
 class Download(object):
-    def __init__(self, name, size, votes, path):
+    def __init__(self, name, votes, path, size=0):
         self.name=name
-        self.size=size
+        self.size = size
         self.votes=votes
         self.path=path
 
@@ -20,15 +18,15 @@ class DownloadData(object):
     def vote(self, name):
         for download in self.downloads:
             if download.name == name:
-                download.votes+=1
-                
+                download.votes+=1                
                 print("Successfully voted for {0}. Total is {1}".format(name, download.votes))
                 return
         print("ERROR: Vote for video not found")
 
-    def add(self, name, size, path):
-        self.downloads.append(Download(name, size, 1, path))
-        print("Added: " + name + " (" + size + "B) to download queue")
+    def add(self, name, path, size=0):
+        nsize = os.stat(path).st_size
+        self.downloads.append(Download(name=name, size=nsize, votes=1, path=path))
+        print("Added: " + name + " (" + str(nsize) + "B) to download queue")
 
     def next(self):
         self.downloads[0].votes = 0
