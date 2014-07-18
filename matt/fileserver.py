@@ -38,13 +38,15 @@ class Broadcast(Protocol):
             self.send_file(sending)
 
     def send_file(self,sending):
-        self.transport.write("begin|{0}".format(sending.name))
+        path_parts = sending.path.split("/")
+        filename = path_parts.pop() 
+        self.transport.write("begin|{0}".format(str(filename)))
         to_broadcast = "x"*(BYTES_READ+1)
         file_to_broadcast = open(sending.path,'r')
         while(len(to_broadcast)>=BYTES_READ):
             to_broadcast=(file_to_broadcast.read(BYTES_READ))
             self.transport.write(to_broadcast)
-            
+        self.transport.write("end")    
         file_to_broadcast.close()
         self.factory.datastore.next()
         print("Finished broadcast.")
