@@ -21,6 +21,7 @@ class Video:
 
 hardcoded = Video("Exede vs. Predator")
 hardcoded.votes = 49
+hardcoded.contribution = round(hardcoded.size / float(hardcoded.votes), 2);
 
 cats ={'comedy': sorted([Video(x) for x in ["Three Days and a Night in Atlanta",
                                             "Mark Dankberg's Big Day",
