@@ -64,6 +64,7 @@
             var toggle = false;
             var num_votes = [];
             var num_sizes = [];
+            var status = []
             var contributions = [];
             {% for elt in queue %}
               num_votes.push({{ elt.votes }});
@@ -74,17 +75,26 @@
             {
               document.getElementsByClassName("vote-toggler")[i].innerHTML = num_votes[i];
               document.getElementsByClassName("contr-toggler")[i].innerHTML = contributions[i];
+              status.push(false);
             }
             
             function vote(index){
 
-              if(!toggle){
+              if(!toggle && !status[index]){
                 document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];
                 document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_sizes[index]/num_votes[index])*100)/100;
                 document.getElementsByClassName("vote")[index].style.color = "#3498db";
                 document.getElementsByClassName("vote")[index].style.borderColor = "#3498db";
+                status[index] = true;
               }
-              toggle = true;
+              else if(toggle && status[index]){
+                document.getElementsByClassName("vote-toggler")[index].innerHTML = --num_votes[index];
+                document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_sizes[index]/num_votes[index])*100)/100;
+                document.getElementsByClassName("vote")[index].style.color = "#fff";
+                document.getElementsByClassName("vote")[index].style.borderColor = "#fff";
+                status[index] = false;
+              }
+              toggle = !toggle;
               if(num_votes[index] >= 50)
               {
                 window.location.assign("download")
