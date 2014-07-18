@@ -5,7 +5,7 @@ import sys
 class ReceiveChunk(Protocol):
     def __init__(self):
         self.reading = False
-        self.curr_name = ""
+        self.curr_path = ""
         self.file_desc = None
 
     def dataReceived(self, data):
@@ -15,8 +15,8 @@ class ReceiveChunk(Protocol):
                 return
             self.file_desc.write(data)
         elif(data.startswith("begin")):
-            self.curr_name = data[5::].strip("\r\n")
-            out = open(self.curr_name, 'w')
+            self.curr_path = data[5::].strip("\r\n")
+            out = open(self.curr_path, 'w')
             self.reading = True
 
                           
