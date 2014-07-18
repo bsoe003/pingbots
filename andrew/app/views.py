@@ -17,26 +17,27 @@ class Video:
 
     def _contribution(self):
         return round(self.size / float(self.votes), 1)
+        
 
-cats = {'popular':[Video(x) for x in ["Hackathon 3D",
-                                      "Mark Dankberg's Big Day",
-                                      "Exede vs. Predator",
-                                      "Sleeping on a Plane"]],
-        'sports':[Video(x) for x in ["Local Sports Stars",
-                                     "Local Sports Stars II: Beating the Better Team",
-                                     "The Giant Football",
-                                     "The Pitcher and the Pilot",
-                                     "Intern Volleyball"]],
-        'action':[Video(x) for x in ["Shooting People with Guns",
-                                     "A Conspicuous Conspirator",
-                                     "Things Exploding Just Far Enough Away"]],
-        'nature':[Video(x) for x in ["When Ladybugs Attack",
-                                     "Roses: Artificial In-stamen-ation",
-                                     "Watermelons, Bananas, and Other Suggestive Plants",
-                                     "The Cabbage Revolution"]],
-        'indie':[Video(x) for x in ["Hipsters Pretending to Understand Fake Concepts",
-                                    "Neutral Milk Hotel Slaying Dragons",
-                                    "Undead Elmo II"]]}
+cats ={'comedy': sorted([Video(x) for x in ["Three Days and a Night in Atlanta",
+                                            "Mark Dankberg's Big Day",
+                                            "Sleeping on a Plane"]], key=lambda vid: vid.votes, reverse=True),
+       'sports':sorted([Video(x) for x in ["Local Sports Stars",
+                                            "Local Sports Stars II: Beating the Better Team",
+                                            "The Giant Football",
+                                            "Hackathon 3D",
+                                            "Intern Volleyball"]], key=lambda vid: vid.votes, reverse=True),
+       'action':sorted([Video(x) for x in ["Shooting People with Guns",
+                                            "A Conspicuous Conspirator",
+                                            "Exede vs. Predator",
+                                            "Things Exploding Just Far Enough Away"]], key=lambda vid: vid.votes, reverse=True),
+       'nature':sorted([Video(x) for x in ["When Ladybugs Attack",
+                                            "Roses: Artificial In-stamen-ation",
+                                            "Watermelons, Bananas, and Other Suggestive Plants",
+                                            "The Cabbage Revolution"]], key=lambda vid: vid.votes, reverse=True),
+       'indie':sorted([Video(x) for x in ["Hipsters Pretending to Understand Fake Concepts",
+                                          "Neutral Milk Hotel Slaying Dragons",
+                                          "Undead Elmo II"]], key=lambda vid: vid.votes, reverse=True)}
 
 @app.route('/')
 @app.route('/index')
@@ -47,11 +48,14 @@ def index():
                            navbar=sorted(cats.keys()),
                            fadeIn=True)
 
-@app.route('/<category>')
-def category(category):
+
+@app.route('/<category>', defaults={'inc': None})
+@app.route('/<category>/<inc>')
+def category(category, inc):
     return render_template("category.html",
                            title="Category Page",
                            navbar=sorted(cats.keys()),
                            category=category,
                            queue=cats[category],
+                           inc=inc,
                            fadeIn=False)
