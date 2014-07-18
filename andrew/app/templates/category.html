@@ -40,9 +40,9 @@
             </div>
             <div class="detail">
 
-            Size (GB) to Votes Ratio:
+            Bandwidth Efficiency:
             <div class="size-votes animated zoomIn">
-              <div class="size" style="width:{{ (vid.size)*100/((vid.size)+vid.votes) }}%"></div>
+              <div class="size" style="width:{{ (vid.votes)*100/((vid.size)+vid.votes) }}%"></div>
             </div>
             <ul style="margin-top: 10px; margin-bottom: -5px">
               <li><b>File Size:</b> {{ vid.size }} GB</li>
