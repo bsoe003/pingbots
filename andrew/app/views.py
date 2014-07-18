@@ -11,14 +11,14 @@ class Video:
     def __init__(self, name, 
                  maxSpeed=50):
         self.name = name
-        self.size = randint(10, 100000000000) / 10**6 # megabytes?
+        self.size = round(randint(10, 100000000000) / 10**9, 2) # megabytes?
         self.votes = randint(1, 20)
         self.time = self._time(maxSpeed)
         self.contribution = self._contribution()
 
     def _time(self, maxSpeed):
         speed = self.votes*12 if maxSpeed > self.votes*12 else maxSpeed
-        return round(self.size / float(speed) / 60, 1)
+        return round(self.size*1000 / float(speed) / 60, 1)
 
     def _contribution(self):
         return round(self.size / float(self.votes), 1)
