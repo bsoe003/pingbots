@@ -38,7 +38,7 @@ class Broadcast(Protocol):
             self.send_file(sending)
 
     def send_file(self,sending):
-        self.transport.write("begin|{0}".format(sending.name))
+        self.transport.write("begin|{0}".format(sending.path))
         to_broadcast = "x"*(BYTES_READ+1)
         file_to_broadcast = open(sending.path,'r')
         while(len(to_broadcast)>=BYTES_READ):
