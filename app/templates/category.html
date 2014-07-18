@@ -49,7 +49,7 @@
               <li><b>Votes:</b> <span class="vote-toggler"></span></li>
             </ul>
             <div class="big-num row">
-              <div class="timeLeft col-md-6"><span class="contr-toggler"></span><br/><span>GB/vote of Data Contribution</span></div>
+              <div class="timeLeft col-md-6"><span class="contr-toggler"></span><br/><span>votes per GB of Data Contribution</span></div>
               <div class="timeLeft col-md-6"><span>{{ vid.time }}</span><br/><span>Minutes to Download</span></div>
             </div>
         
@@ -81,24 +81,25 @@
             function vote(index){
 
               if(!toggle && !status[index]){
-                document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];
-                document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_sizes[index]/num_votes[index])*100)/100;
+                document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];  
                 document.getElementsByClassName("vote")[index].style.color = "#3498db";
                 document.getElementsByClassName("vote")[index].style.borderColor = "#3498db";
                 status[index] = true;
+                toggle = !toggle;
               }
               else if(toggle && status[index]){
                 document.getElementsByClassName("vote-toggler")[index].innerHTML = --num_votes[index];
-                document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_sizes[index]/num_votes[index])*100)/100;
                 document.getElementsByClassName("vote")[index].style.color = "#fff";
                 document.getElementsByClassName("vote")[index].style.borderColor = "#fff";
                 status[index] = false;
+                toggle = !toggle;
               }
-              toggle = !toggle;
+              document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_votes[index]/num_sizes[index])*100)/100;
+              document.getElementsByClassName("size")[index].style.width = (Math.round(num_votes[index]*100)/(num_votes[index]+num_sizes[index])).toString() + "%";
               if(num_votes[index] >= 50)
               {
-                window.location.assign("download")
-              };
+                window.location.assign("download");
+              }
             }
           </script>
             </div>

@@ -16,12 +16,12 @@ class Video:
         return round(self.size*1000 / float(speed) / 60, 1)
 
     def _contribution(self):
-        result = round(self.size / float(self.votes), 2)
+        result = round(self.votes / float(self.size), 2)
         return "%.2f" % result
 
 hardcoded = Video("Exede vs. Predator")
 hardcoded.votes = 49
-hardcoded.contribution = round(hardcoded.size / float(hardcoded.votes), 2);
+hardcoded.contribution = round(hardcoded.votes / float(hardcoded.size), 2);
 
 cats ={'comedy': sorted([Video(x) for x in ["Three Days and a Night in Atlanta",
                                             "Mark Dankberg's Big Day",
