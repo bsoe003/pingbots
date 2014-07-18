@@ -13,10 +13,11 @@ class ReceiveChunk(Protocol):
             if(data.strip("\r\n")=="end transmission"):
                 self.file_desc.close()
                 print("Done.")
+                self.reading=False
                 return
             self.file_desc.write(data)
         elif(data.startswith("begin")):
-            self.curr_path = "./" + data[5::].strip("\r\n")
+            self.curr_path = "./" + data[4::].strip("\r\n")
             out = open(self.curr_path, 'w')
             self.reading = True
             print("Begun reading")
