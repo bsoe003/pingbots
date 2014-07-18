@@ -1,11 +1,6 @@
-from app import app, db, lm
-from flask import render_template, g, redirect, session
-from flask.ext.login import (
-    login_user, logout_user, current_user, login_required, url_for
-)
+from app import app
+from flask import render_template, redirect
 from random import randint
-from forms import LoginForm
-from models import User
 
 class Video:
     def __init__(self, name, 
@@ -60,34 +55,3 @@ def category(category):
                            category=category,
                            queue=cats[category],
                            fadeIn=False)
-
-@app.route('/downloads')
-def downloads():
-    queue=['Movie1',
-           'Movie2']
-    navbar=["index"]
-    return render_template('categories.html',
-                            title="Downloads Page",
-                            queue=queue,
-                            navbar=navbar,
-                            category="Downloads"
-                            )
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.username.data is not None:
-        login_user(load_user(form.username.data))
-        return redirect(url_for('index'))
-    if form.validate_on_submit():
-        return redirect('/index')
-    return render_template('login.html',
-                           title='Sign In',
-                           navbar=sorted(cats.keys()),
-                           form=form)
-
-@lm.user_loader
-def load_user(name):
-    for user in User.query.all():
-        if user.username == name:
-            return user
