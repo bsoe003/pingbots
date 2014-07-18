@@ -19,6 +19,9 @@ class Video:
         result = round(self.size / float(self.votes), 2)
         return "%.2f" % result
 
+hardcoded = Video("Exede vs. Predator")
+hardcoded.votes = 49
+
 cats ={'comedy': sorted([Video(x) for x in ["Three Days and a Night in Atlanta",
                                             "Mark Dankberg's Big Day",
                                             "Sleeping on a Plane"]], key=lambda vid: vid.votes, reverse=True),
@@ -27,10 +30,10 @@ cats ={'comedy': sorted([Video(x) for x in ["Three Days and a Night in Atlanta",
                                             "The Giant Football",
                                             "Hackathon 3D",
                                             "Intern Volleyball"]], key=lambda vid: vid.votes, reverse=True),
-       'action':sorted([Video(x) for x in ["Shooting People with Guns",
-                                            "A Conspicuous Conspirator",
-                                            "Exede vs. Predator",
-                                            "Things Exploding Just Far Enough Away"]], key=lambda vid: vid.votes, reverse=True),
+       'action':sorted([Video("Shooting People with Guns"),
+                        Video("A Conspicuous Conspirator"),
+                        hardcoded,
+                        Video("Things Exploding Just Far Enough Away")], key=lambda vid: vid.votes, reverse=True),
        'nature':sorted([Video(x) for x in ["When Ladybugs Attack",
                                             "Roses: Artificial In-stamen-ation",
                                             "Watermelons, Bananas, and Other Suggestive Plants",
