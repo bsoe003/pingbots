@@ -10,10 +10,12 @@
           {% for vid in queue %}
           <script type="text/javascript">
             var toggle = false;
+            var names = [];
             var num_votes = [];
             var num_sizes = [];
             var contributions = [];
             {% for elt in queue %}
+              names.push({{ elt.name }});
               num_votes.push({{ elt.votes }});
               num_sizes.push({{ elt.size }});
               contributions.push({{ elt.contribution }});
@@ -37,6 +39,7 @@
 	            <b>{{ vid.name }}</b>
             </div>
             <div class="detail">
+
             Size (GB) to Votes Ratio:
             <div class="size-votes animated zoomIn">
               <div class="size" style="width:{{ (vid.size)*100/((vid.size)+vid.votes) }}%"></div>
@@ -49,10 +52,10 @@
               <div class="timeLeft col-md-6"><span class="contr-toggler"></span><br/><span>GB/vote of Data Contribution</span></div>
               <div class="timeLeft col-md-6"><span>{{ vid.time }}</span><br/><span>Minutes to Download</span></div>
             </div>
+        
             <div class="vote" onclick="vote({{ loop.index }}-1)">
               <span class="glyphicon glyphicon-thumbs-up"></span> <span>Click to Vote!</span>
             </div>
-
 	       </div>
         </div>
          <!-- <div class="queue"></div> -->
@@ -74,16 +77,32 @@
             }
             
             function vote(index){
+
               if(!toggle){
                 document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];
                 document.getElementsByClassName("contr-toggler")[index].innerHTML = Math.round((num_sizes[index]/num_votes[index])*100)/100;
+                document.getElementsByClassName("vote")[index].style.color = "#3498db";
+                document.getElementsByClassName("vote")[index].style.borderColor = "#3498db";
               }
               toggle = true;
+              if(num_votes[index] >= 50)
+              {
+                window.location.assign("download")
+              };
             }
           </script>
             </div>
           </div>
           {% endif %}
+    {% elif value %}
+      <div class="download">
+      <h3>Downloading: <b>Exede vs. Predator</b></h3>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 3%">
+          <span class="sr-only">45% Complete</span>
+        </div>
+      </div>
+    </div>
 	  {% else %}
 	  <h1>Choose a category in the Navigation Bar!</h1>
 	  {% endif %}

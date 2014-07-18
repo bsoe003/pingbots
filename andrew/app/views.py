@@ -40,6 +40,15 @@ cats = {'popular':[Video(x) for x in ["Hackathon 3D",
                                     "Neutral Milk Hotel Slaying Dragons",
                                     "Undead Elmo II"]]}
 
+@app.route('/download')
+def download():
+    title = "Downloading"
+    return render_template("category.html",
+                           title="Downloading",
+                           navbar=sorted(cats.keys()),
+                           value='download',
+                           download=True)
+
 @app.route('/')
 @app.route('/index')
 def index():

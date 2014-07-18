@@ -75,7 +75,7 @@ header > img
 	margin-top: 0;
 }
 
-.active
+.active-nav
 {
 	border-left: 5px solid #f26322;
 	background-color: #252525;
@@ -236,7 +236,7 @@ header > img
 .timeLeft
 {
 	text-align: center;
-	margin-left: -35px;
+	margin-left: -11.5%;
 }
 
 .timeLeft > span:nth-child(1)
@@ -251,7 +251,7 @@ header > img
 	text-align: center;
 	margin-top: 10px;
 	font-size: 20px;
-	margin-left: 75px;
+	margin-left: 20%;
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
@@ -285,4 +285,9 @@ footer > .row > .col-md-4:nth-child(3)
 footer > .row > .col-md-4 > img
 {
 	width: 150px;
+}
+
+.download
+{
+	margin-top: 15%;
 }
