@@ -41,6 +41,7 @@ class Broadcast(Protocol):
         path_parts = sending.path.split("/")
         filename = path_parts.pop() 
         self.transport.write("begin|{0}".format(str(filename)))
+        time.sleep(1)
         to_broadcast = "x"*(BYTES_READ+1)
         file_to_broadcast = open(sending.path,'r')
         while(len(to_broadcast)>=BYTES_READ):
