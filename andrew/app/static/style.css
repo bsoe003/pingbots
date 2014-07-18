@@ -67,6 +67,14 @@ header > img
 	cursor: pointer;
 }
 
+#nav > h3
+{
+	margin-left: 55px;
+	font-weight: bolder;
+	color: orange;
+	margin-top: 0;
+}
+
 .active
 {
 	border-left: 5px solid #f26322;
@@ -75,7 +83,7 @@ header > img
 
 #content
 {
-	margin-left: 250px;
+	margin-left: 220px;
 	margin-right: 75px;
 	margin-top: 75px;
 	position: absolute;
@@ -130,6 +138,7 @@ header > img
 {
 	background-color: #34465d;
 }
+
 .cont
 {
 	display: inline-table;
@@ -174,7 +183,7 @@ header > img
 	margin-left: 1%;
 	margin-bottom: 25px;
 	padding-left: 35px;
-
+	padding-top: 10px;
 }
 
 #username
@@ -202,26 +211,26 @@ header > img
 .size-votes
 {
 	width: 90%;
-	overflow: hidden;
 	margin-top: 7px;
+	height: 20px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: #c0392b;
 }
 
 .size
 {
 	height: 20px;
 	background-color: #e67e22;
-	float: left;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
 
-.votes
+.big-num
 {
-	height: 20px;
-	background-color: #c0392b;
-	overflow: hidden;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	margin-left: 60px;
 }
 
 .timeLeft
@@ -237,14 +246,29 @@ header > img
 	font-weight: bold;
 }
 
+.vote
+{
+	text-align: center;
+	margin-top: 10px;
+	font-size: 20px;
+	margin-left: 75px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 7px;
+	border: 3px solid white;
+	width: 50%;
+}
+
 footer
 {
 	bottom: 0;
-	/*position: absolute;*/
-	margin-left: 10%;
-	margin-right: 10%;
+	position: fixed;
+	width: 100%;
+	padding-left: 10%;
 	padding-top: 30px;
 	padding-bottom: 30px;
+	background-color: #1a1a1a;
 }
 
 footer > .row > .col-md-4

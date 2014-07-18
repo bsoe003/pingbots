@@ -21,7 +21,9 @@ class Video:
         return round(self.size*1000 / float(speed) / 60, 1)
 
     def _contribution(self):
-        return round(self.size / float(self.votes), 1)
+        result = round(self.size / float(self.votes), 2)
+        return "%.2f" % result
+
 
 cats = {'popular':[Video(x) for x in ["Hackathon 3D",
                                       "Mark Dankberg's Big Day",

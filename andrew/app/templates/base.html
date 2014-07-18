@@ -1,5 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Brian Soe">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
     <title>{{ title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
@@ -15,6 +22,7 @@
     </header>
     <div id="wrapper">
       <div id="nav"> <!-- nav tab -->
+      <h3>Categories:</h3>
         <ul {% if fadeIn %} class="animated fadeInDown"{% endif %}>
         	{% for elt in navbar %}
 		{% if elt == category %}
@@ -37,9 +45,6 @@
         <li><img src="static/tumblr-2.png" alt="tumblr"/></li> 
       </ul>
     </div>
-    <footer>
-      &copy; 2014 ViaSat Intern Hackathon. Ping-able Pingbots. All rights reserved. 
-    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
   </body>

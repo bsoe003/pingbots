@@ -8,26 +8,79 @@
 	  <div>
               <div class="row">
           {% for vid in queue %}
-
+          <script type="text/javascript">
+            var toggle = false;
+            var num_votes = [];
+            var num_sizes = [];
+            var contributions = [];
+            {% for elt in queue %}
+              num_votes.push({{ elt.votes }});
+              num_sizes.push({{ elt.size }});
+              contributions.push({{ elt.contribution }});
+            {% endfor %}
+            for(i = 0; i < num_votes.length; i++)
+            {
+              document.getElementsByClassName("vote-toggler")[i].innerHTML = num_votes[i];
+              document.getElementsByClassName("contr-toggler")[i].innerHTML = contributions[i];
+            }
+            
+            function vote(index){
+              if(!toggle){
+                document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];
+                document.getElementsByClassName("contr-toggler")[index].innerHTML = num_sizes[index]/num_votes[index];
+              }
+              toggle = true;
+            }
+          </script>
           <div class="col-md-4">
             <div class="title">
 	            <b>{{ vid.name }}</b>
             </div>
             <div class="detail">
             Size (GB) to Votes Ratio:
-            <div class="size-votes">
+            <div class="size-votes animated zoomIn">
               <div class="size" style="width:{{ (vid.size)*100/((vid.size)+vid.votes) }}%"></div>
-              <div class="votes" style="width:{{ (vid.votes)*100/((vid.size)+vid.votes) }}%"></div>
             </div>
             <ul style="margin-top: 10px; margin-bottom: -5px">
-              <li>File Size: {{ vid.size }} GB</li>
-              <li>Votes: {{ vid.votes }}</li>
+              <li><b>File Size:</b> {{ vid.size }} GB</li>
+              <li><b>Votes:</b> <span class="vote-toggler"></span></li>
             </ul>
-            <div class="timeLeft"><span>{{ vid.time }}</span><br/><span>minutes of duration</span></div>
+            <div class="big-num row">
+              <div class="timeLeft col-md-6"><span class="contr-toggler"></span><br/><span>GB/vote of Data Contribution</span></div>
+              <div class="timeLeft col-md-6"><span>{{ vid.time }}</span><br/><span>Minutes to Download</span></div>
+            </div>
+            <div class="vote" onclick="vote({{ loop.index }}-1)">
+              <span class="glyphicon glyphicon-thumbs-up"></span> <span>Click to Vote!</span>
+            </div>
+
 	       </div>
         </div>
-         
+         <!-- <div class="queue"></div> -->
             {% endfor %}
+          <script type="text/javascript">
+            var toggle = false;
+            var num_votes = [];
+            var num_sizes = [];
+            var contributions = [];
+            {% for elt in queue %}
+              num_votes.push({{ elt.votes }});
+              num_sizes.push({{ elt.size }});
+              contributions.push({{ elt.contribution }});
+            {% endfor %}
+            for(i = 0; i < num_votes.length; i++)
+            {
+              document.getElementsByClassName("vote-toggler")[i].innerHTML = num_votes[i];
+              document.getElementsByClassName("contr-toggler")[i].innerHTML = contributions[i];
+            }
+            
+            function vote(index){
+              if(!toggle){
+                document.getElementsByClassName("vote-toggler")[index].innerHTML = ++num_votes[index];
+                document.getElementsByClassName("contr-toggler")[index].innerHTML = num_sizes[index]/num_votes[index];
+              }
+              toggle = true;
+            }
+          </script>
             </div>
           </div>
           {% endif %}
