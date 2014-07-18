@@ -44,7 +44,7 @@ class Broadcast(Protocol):
         while(len(to_broadcast)>=BYTES_READ):
             to_broadcast=(file_to_broadcast.read(BYTES_READ))
             self.transport.write(to_broadcast)
-            
+        self.transport.write("end")    
         file_to_broadcast.close()
         self.factory.datastore.next()
         print("Finished broadcast.")
