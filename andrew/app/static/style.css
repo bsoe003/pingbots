@@ -230,13 +230,8 @@ header > img
 
 .big-num
 {
-	margin-left: 60px;
-}
-
-.timeLeft
-{
-	text-align: center;
-	margin-left: -11.5%;
+	margin-left: -18px;
+	width: 100%;
 }
 
 .timeLeft > span:nth-child(1)
@@ -246,18 +241,24 @@ header > img
 	font-weight: bold;
 }
 
+.timeLeft
+{
+	text-align: center;
+}
+
 .vote
 {
 	text-align: center;
 	margin-top: 10px;
 	font-size: 20px;
-	margin-left: 20%;
+	margin-left: 17%;
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
 	border-radius: 7px;
 	border: 3px solid white;
-	width: 50%;
+	width: 55%;
+	padding: 3px 3px 3px 3px;
 }
 
 footer
