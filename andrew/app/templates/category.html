@@ -19,15 +19,16 @@
           		<li><b>Votes:</b> {{ vid.votes }}</li>
           		<li><b>Time:</b> {{ vid.time }} minutes</li>
           		<li><b>Contribution per Voter:</b> {{ vid.contribution }} MB</li>-->
-              <div class="time">
-                
-              </div>
-              <div class="size-vote">
-                
-              </div>
 	          </ul>
-	          </div>
+            Size (GB) to Votes Ratio:
+            <div class="size-votes">
+              <div class="size" style="width:{{ (vid.size/1024.0)*100/((vid.size/1024.0)+vid.votes) }}%"></div>
+              <div class="votes" style="width:{{ (vid.votes)*100/((vid.size/1024.0)+vid.votes) }}%"></div>
             </div>
+            <div class="timeLeft"><span>{{ vid.time }}</span><br/><span>min left</span></div>
+
+	       </div>
+        </div>
          
             {% endfor %}
             </div>
