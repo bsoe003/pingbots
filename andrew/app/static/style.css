@@ -50,6 +50,7 @@ header > img
 	padding-bottom: 10px;
 	padding-right: 20px;
 	border-left: 5px solid transparent;
+	font-weight: bold;
 }
 
 #nav > ul
@@ -171,11 +172,32 @@ header > img
 	margin-bottom: 25px;
 }
 
+#username
+{
+	background-color: #0a0a0a;
+	border-style: none;
+	height: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px solid #5a5a5a;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+#submit
+{
+	background-color: #f26322;
+	border-style: none;
+	height: 40px;
+	width: 69px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
 footer
 {
 	bottom: 0;
 	position: absolute;
-	width: 100%;
 	margin-left: 10%;
 	margin-right: 10%;
 	padding-top: 30px;
